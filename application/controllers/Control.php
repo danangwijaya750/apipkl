@@ -1,4 +1,5 @@
 <?php
+ header('Content-Type: application/json');
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Control extends CI_Controller {
@@ -14,20 +15,32 @@ class Control extends CI_Controller {
     //login untuk siswa
     function login_siswa(){
         $as="pkl_siswa";
-        $user=$this->input->post('user');
-        $pass=$this->input->pos('pass');
-        $respon['code:'];
-        if($data=$this->Models->login($as,$user,$pass)){
+        $user=$this->input->get('user');
+        $pass=$this->input->get('pass');
+        $obj=array();
+        $obj['resCode']="200";
+        $obj['status']="1";
+        $obj['err']="";
+        if($data=$this->Models->login_siswa($user)){
         $passwd='';
         foreach($data as $key){
             $passwd=$key->password;
         }
         if($passwd!=md5($pass)){
-            echo"false";
+            $obj['status']="0";
+            $obj['err']="Wrong password";
+            $obj['logins']=[null];
+            echo json_encode($obj);
         }else{
-            echo json_encode($data);
+            $obj['logins']=$data;
+            echo json_encode($obj);
         }
-        }else{echo 'user not found';}
+        }else{
+            $obj['status']="0";
+            $obj['err']="User Not Found";
+            $obj['logins']=$data;
+            echo json_encode($obj);
+        }
     }
     //insert to header kelompok
     public function head_insert(){
@@ -49,19 +62,44 @@ class Control extends CI_Controller {
 
     }
 
+    public function get_dash(){
+        $id_kelompok=$this->input->get('id');
+        $data=$this->Models->GetDash($id_kelompok);
+        $obj = array();
+        $obj['resCode']="200";
+        $obj['status']="sucess";
+        $obj['error']="";
+        $obj['dashboards']=$data;
+        if($data==null){
+            $obj['status']="no data";
+            $obj['error']="no data";
+        }
+        echo json_encode($obj);
+    }
+
 
     //fetch siswa yang belu memiliki kelompok dalam 1 kelas
     public function fetch_siswa(){
         $id_jur=$this->input->get('jurusan');
         $kelas=$this->input->get('kelas');
         $data=$this->Models->fetch_siswa($id_jur,$kelas);
-        echo json_encode($data);
+        $obj = array();
+        $obj['resCode']="200";
+        $obj['status']="sucess";
+        $obj['error']="";
+        $obj['siswas']=$data;
+        echo json_encode($obj);
     }
     //fetch DUDI yang sesuai dengan jurusan
     public function fetch_dudi(){
         $id_jur=$this->input->get('jurusan');
         $data=$this->Models->fetch_dudi($id_jur);
-        echo json_encode($data);
+        $obj=array();
+        $obj['resCode']="200";
+        $obj['status']="sucess";
+        $obj['error']="";
+        $obj['dudis']=$data;
+        echo json_encode($obj);
     }
     //fetch kelompok yang belum dan sudah di acc PJ jurusan 
     public function fetch_kelompok(){

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
+-- version 4.5.4.1deb2ubuntu2.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 16, 2018 at 09:22 AM
--- Server version: 5.7.23-0ubuntu0.16.04.1
--- PHP Version: 7.0.30-0ubuntu0.16.04.1
+-- Generation Time: Dec 05, 2018 at 03:02 PM
+-- Server version: 5.7.24-0ubuntu0.16.04.1
+-- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -46,6 +46,14 @@ CREATE TABLE `pkl_detail_kelompok` (
   `acc` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pkl_detail_kelompok`
+--
+
+INSERT INTO `pkl_detail_kelompok` (`id`, `id_kelompok`, `id_siswa`, `acc`) VALUES
+(1, 1, 1, 0),
+(2, 2, 2, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -69,8 +77,9 @@ CREATE TABLE `pkl_dudi` (
 --
 
 INSERT INTO `pkl_dudi` (`id`, `id_jurusan`, `username`, `password`, `nama_perusahaan`, `alamat`, `phone`, `deskripsi`, `image`) VALUES
-(1, 1, 'isp1', 'isp', 'isp', 'sini', '09012312', 'untuk TKJ', 'asdasd'),
-(2, 2, 'dudimm', 'dudimm', 'video shoot', 'asdasda', 'asdas', 'dfsdfsf', 'fasasfds');
+(1, 1, 'isp1', 'isp', 'isp', 'sini', '09012312', 'untuk TKJ', 'http://ardhana.co.id/wp-content/uploads/2016/07/CITRANET.png'),
+(2, 2, 'dudimm', 'dudimm', 'video shoot', 'asdasda', 'asdas', 'dfsdfsf', 'fasasfds'),
+(3, 1, 'isp2', 'dasdasda', 'isp 2 yoi', 'dasdasdasd', '09090912321', 'jajdaskdjalsjdlasdl', 'https://pbs.twimg.com/profile_images/459598765674860544/I5BfzLao_400x400.png');
 
 -- --------------------------------------------------------
 
@@ -113,8 +122,14 @@ CREATE TABLE `pkl_kelompok` (
 --
 
 INSERT INTO `pkl_kelompok` (`id`, `id_jurusan`, `id_dudi`, `tahun`, `period`, `verif_by_pj`) VALUES
-(1, 1, 1, '2018', 1, 0),
-(2, 2, 2, '2018', 1, 0);
+(1, 1, 1, '2001', 1, 0),
+(2, 2, 2, '2018', 1, 0),
+(3, 1, 3, '2018', 1, 0),
+(5, 1, 3, '2018', 1, 0),
+(6, 1, 3, '2018', 1, 0),
+(7, 1, 3, '2018', 1, 0),
+(8, 1, 3, '2018', 1, 0),
+(9, 1, 3, '2018', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -162,9 +177,9 @@ CREATE TABLE `pkl_siswa` (
 --
 
 INSERT INTO `pkl_siswa` (`id`, `username`, `password`, `nama`, `id_jurusan`, `kelas`, `alamat`, `phone`, `image`) VALUES
-(1, 'siswa1', '83218ac34c1834c26781fe4bde918ee4', 'saya', 1, 'XIITKJ1', 'omah', 123, ''),
-(2, 'siswa2', '83218ac34c1834c26781fe4bde918ee4', 'siswaw', 1, 'XIITKJ2', 'sini', 1231, 'asdas'),
-(3, 'siswa3', '83218ac34c1834c26781fe4bde918ee4', 'siswa3', 1, 'XIITKJ1', 'hdhdhdh', 1234556654, 'asdasd');
+(1, 'siswa1', 'bcd724d15cde8c47650fda962968f102', 'saya', 1, 'XIITKJ1', 'omah', 123, ''),
+(2, 'siswa2', 'bcd724d15cde8c47650fda962968f102', 'siswaw', 2, 'XIITKJ2', 'sini', 1231, 'asdas'),
+(3, 'siswa3', 'bcd724d15cde8c47650fda962968f102', 'siswa3', 1, 'XIITKJ1', 'hdhdhdh', 1234556654, 'asdasd');
 
 --
 -- Indexes for dumped tables
@@ -232,12 +247,12 @@ ALTER TABLE `pkl_admin`
 -- AUTO_INCREMENT for table `pkl_detail_kelompok`
 --
 ALTER TABLE `pkl_detail_kelompok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `pkl_dudi`
 --
 ALTER TABLE `pkl_dudi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `pkl_jurusan`
 --
@@ -247,7 +262,7 @@ ALTER TABLE `pkl_jurusan`
 -- AUTO_INCREMENT for table `pkl_kelompok`
 --
 ALTER TABLE `pkl_kelompok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `pkl_pj_jurusan`
 --
